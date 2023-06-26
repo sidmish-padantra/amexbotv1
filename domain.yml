@@ -1,0 +1,42 @@
+version: '3.0'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- deny
+- greet
+- inquire_details
+- affirm
+- goodbye
+- bot_challenge
+
+
+entities:
+- ID
+
+slots:
+  user_ID:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: ID
+
+
+responses:
+  utter_greet:
+  - text: Hey! How are you?
+  utter_prompt:
+  - text: Do you want to look up the details for a certain ID?
+  utter_goodbye:
+  - text: Bye
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+  utter_query_again:
+  - text: Would you like to query another ID?
+actions:
+- action_givedetails
+- utter_goodbye
+- utter_greet
+- utter_prompt
+- utter_query_again
